@@ -6,7 +6,7 @@
                 <artifactId>snaps-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <configuration>
-                    <name>pentahodataintegration</name>
+                    <name>${pom.name}</name>
                     <version>${pom.version}</version>
                     <summary>Pentaho Data Integration Community Edition</summary>
                     <description>Pentaho Data Integration Community Edition</description>
