@@ -22,6 +22,8 @@ public class App {
     @Parameters
     private List<String> plugs;
 
+    private List<String> slots;
+
     public String getName() {
         return name;
     }
@@ -32,5 +34,9 @@ public class App {
 
     public List<String> getPlugs() {
         return plugs;
+    }
+
+    public List<String> getSlots() {
+        return slots;
     }
 }

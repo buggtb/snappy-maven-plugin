@@ -92,8 +92,12 @@ public class BuildMojo extends AbstractMojo {
     for (Map.Entry<String, App> entry : apps.entrySet())
     {
       Map<String, Object> appentry = new HashMap<>();
-      appentry.put("command", entry.getValue().getCommand());
-      appentry.put("plugs", entry.getValue().getPlugs().toArray());
+      if(entry.getValue().getCommand()!=null) {
+        appentry.put("command", entry.getValue().getCommand());
+      }
+      if(entry.getValue().getPlugs()!=null && entry.getValue().getPlugs().size()>0) {
+        appentry.put("plugs", entry.getValue().getPlugs().toArray());
+      }
       appss.put(entry.getKey(), appentry);
 
     }
@@ -127,6 +131,48 @@ public class BuildMojo extends AbstractMojo {
 
       if(entry.getValue().getStagepackages()!=null && entry.getValue().getStagepackages().size()>0) {
         partentry.put("stage-packages", entry.getValue().getStagepackages().toArray());
+      }
+      if(entry.getValue().getBuildpackages()!=null && entry.getValue().getBuildpackages().size()>0) {
+        partentry.put("build-packages", entry.getValue().getBuildpackages().toArray());
+      }
+      if(entry.getValue().getAfter()!=null && entry.getValue().getAfter().size()>0) {
+        partentry.put("after", entry.getValue().getAfter().toArray());
+      }
+      if(entry.getValue().getNodepackages()!=null && entry.getValue().getNodepackages().size()>0) {
+        partentry.put("node-packages", entry.getValue().getNodepackages().toArray());
+      }
+      if(entry.getValue().getGopackages()!=null && entry.getValue().getGopackages().size()>0) {
+       partentry.put("go-packages", entry.getValue().getGopackages().toArray());
+      }
+      if(entry.getValue().getConfigflags()!=null && entry.getValue().getConfigflags().size()>0) {
+        partentry.put("configflags", entry.getValue().getConfigflags().toArray());
+      }
+      if(entry.getValue().getSnap()!=null && entry.getValue().getSnap().size()>0) {
+        partentry.put("snap", entry.getValue().getSnap().toArray());
+      }
+      if(entry.getValue().getOpampackages()!=null && entry.getValue().getOpampackages().size()>0) {
+        partentry.put("opam-packages", entry.getValue().getOpampackages().toArray());
+      }
+      if(entry.getValue().getGruntfile()!=null){
+        partentry.put("gruntfile", entry.getValue().getGruntfile());
+      }
+      if(entry.getValue().getQtversion()!=null){
+        partentry.put("qt-version", entry.getValue().getQtversion());
+      }
+      if(entry.getValue().getGoimportpath()!=null){
+        partentry.put("go-importpath", entry.getValue().getGoimportpath());
+      }
+      if(entry.getValue().getSourcetag()!=null){
+        partentry.put("source-tag", entry.getValue().getSourcetag());
+      }
+      if(entry.getValue().getSourcesubdir()!=null){
+        partentry.put("source-subdir", entry.getValue().getSourcesubdir());
+      }
+      if(entry.getValue().getInstallvia()!=null){
+        partentry.put("install-via", entry.getValue().getInstallvia());
+      }
+      if(entry.getValue().getSourcetype()!=null){
+        partentry.put("source-type", entry.getValue().getSourcetype());
       }
       partss.put(entry.getKey(), partentry);
     }
