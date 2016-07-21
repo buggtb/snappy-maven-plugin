@@ -79,14 +79,7 @@ public class BuildMojo extends AbstractMojo {
   }
 
 
-
-  @Override
-  public void execute() throws MojoExecutionException, MojoFailureException {
-    DumperOptions options = new DumperOptions();
-    options.setLineBreak(DumperOptions.LineBreak.UNIX);
-    options.setExplicitStart(false);
-    options.setIndent(4);
-    options.setPrettyFlow(true);
+  private Map processXML(){
     Map<String,Object> appss = new HashMap<>();
 
     for (Map.Entry<String, App> entry : apps.entrySet())
@@ -142,7 +135,7 @@ public class BuildMojo extends AbstractMojo {
         partentry.put("node-packages", entry.getValue().getNodepackages().toArray());
       }
       if(entry.getValue().getGopackages()!=null && entry.getValue().getGopackages().size()>0) {
-       partentry.put("go-packages", entry.getValue().getGopackages().toArray());
+        partentry.put("go-packages", entry.getValue().getGopackages().toArray());
       }
       if(entry.getValue().getConfigflags()!=null && entry.getValue().getConfigflags().size()>0) {
         partentry.put("configflags", entry.getValue().getConfigflags().toArray());
@@ -177,6 +170,18 @@ public class BuildMojo extends AbstractMojo {
       partss.put(entry.getKey(), partentry);
     }
     m.put("parts", partss);
+    return m;
+  }
+
+
+  @Override
+  public void execute() throws MojoExecutionException, MojoFailureException {
+    DumperOptions options = new DumperOptions();
+    options.setLineBreak(DumperOptions.LineBreak.UNIX);
+    options.setExplicitStart(false);
+    options.setIndent(4);
+    options.setPrettyFlow(true);
+
     Yaml yaml = new Yaml(options);
     FileWriter fw = null;
     try {
@@ -186,7 +191,8 @@ public class BuildMojo extends AbstractMojo {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    yaml.dump(m, fw);
+
+    yaml.dump(processXML(), fw);
 
     try {
       if (fw != null) {
