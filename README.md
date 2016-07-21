@@ -12,6 +12,8 @@ The plugin currently isn't in maven central, so you need to define a 3rd party r
 
 The plugin itself is an XML representation of all the tags I could find. More work has to be done to clean this up, but it is functional. See TODO for more info about missing pieces.
  
+mvn clean uk.co.spicule:snaps-maven-plugin:snaps
+
     <pluginRepositories>
         <pluginRepository>
           <id>alabs.release</id>
